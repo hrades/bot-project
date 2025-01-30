@@ -1,7 +1,7 @@
 <!--Exemplo de launch com xml-->
 
 <launch>
-    <let name="urdf_path" value="$(finf-pkg-share description)/urdf/my_robot.urdf" />
+    <let name="urdf_path" value="$(finf-pkg-share description)/my_robot.urdf" />
 
     <node pkg="robot_state_publisher" exec="robot_state_publisher">
         <param name="robot_description" value="$(command 'xacro $(var urdf_path)" />
