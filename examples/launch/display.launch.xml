@@ -1,7 +1,9 @@
 <!--Exemplo de launch com xml-->
 
 <launch>
-    <let name="urdf_path" value="$(finf-pkg-share description)/my_robot.urdf" />
+    <let name="urdf_path" value="$(find-pkg-share description)/my_robot.urdf" />
+
+    <let name="rviz_path" value="$(find-pkg-share description)/urdf_robot_config.rviz"/>
 
     <node pkg="robot_state_publisher" exec="robot_state_publisher">
         <param name="robot_description" value="$(command 'xacro $(var urdf_path)" />
@@ -9,5 +11,6 @@
 
     <node pkg="joint_state_publisher_gui" exec="joint_state_publisher_gui" />
 
-    <node pkg="rviz2" exec="rviz2" />
+    <node pkg="rviz2" exec="rviz2" output="screen" 
+        args="-d $(var rviz_path)" />
 </launch>
