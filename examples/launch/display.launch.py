@@ -10,7 +10,7 @@ def generate_launch_description():
 
     urdf_path = os.path.join(get_package_share_path('description'), 'urdf', 'my_robot.urdf')
 
-    robot_description = ParameterValue(Command(['xacro', urdf_path]), value_type=str)
+    robot_description = ParameterValue(Command(['xacro ', urdf_path]), value_type=str)
 
     robot_state_publisher_node = Node(
         package="robot_state_publisher",
