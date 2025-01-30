@@ -10,6 +10,8 @@ def generate_launch_description():
 
     urdf_path = os.path.join(get_package_share_path('description'), 'my_robot.urdf')
 
+    rviz_path = os.path.join(get_package_share_path('description'), 'urdf_robot_config.rviz')
+
     robot_description = ParameterValue(Command(['xacro ', urdf_path]), value_type=str)
 
     robot_state_publisher_node = Node(
@@ -25,7 +27,9 @@ def generate_launch_description():
 
     rviz2_node = Node(
         package="rviz2",
-        executable="rviz2"
+        executable="rviz2",
+        # Para a próxima parte, um arquivo do .rviz deve ser salvo com as configurações do "mundo" para ver o robô
+        arguments=['-d', rviz_path]
     )
 
     return LaunchDescription([
