@@ -1,7 +1,7 @@
 <!--Exemplo de launch com xml-->
 
 <launch>
-    <let name="urdf_path" value="$(find-pkg-share description)/my_robot.urdf" />
+    <let name="urdf_path" value="$(find-pkg-share description)/my_robot.urdf.xacro" />
 
     <let name="rviz_path" value="$(find-pkg-share description)/urdf_robot_config.rviz"/>
 
