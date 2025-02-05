@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<robot name="my_robot" xmlns:xacro="hettps://www.ros.org/wiki/xacro">
+
+    <!-- Importar Cores (propriedades comuns) -->
+    <xacro:include filename="cm_properties.xacro"/>
+
+    <!-- Importar links e juntas -->
+    <xacro:include filename="robot_base.xacro"/>
+
+</robot>
