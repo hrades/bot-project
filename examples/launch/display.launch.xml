@@ -1,9 +1,9 @@
 <!--Exemplo de launch com xml-->
 
 <launch>
-    <let name="urdf_path" value="$(find-pkg-share description)/my_robot.urdf.xacro" />
+    <let name="urdf_path" value="$(find-pkg-share my_robot_description)/my_robot.urdf.xacro" />
 
-    <let name="rviz_path" value="$(find-pkg-share description)/urdf_robot_config.rviz"/>
+    <let name="rviz_path" value="$(find-pkg-share my_robot_description)/urdf_robot_config.rviz"/>
 
     <node pkg="robot_state_publisher" exec="robot_state_publisher">
         <param name="robot_description" value="$(command 'xacro $(var urdf_path)" />
