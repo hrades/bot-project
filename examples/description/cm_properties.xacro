@@ -26,7 +26,7 @@
         </inertial>
     </xacro:macro>
 
-    <xacro:macro name="cylinder_inertial" params="m r h o_xyz o_rpy">
+    <xacro:macro name="cylinder_inertia" params="m r l o_xyz o_rpy">
         <inertial>
             <mass value="${m}" />
             <origin xyz="${o_xyz}" rpy="${o_rpy}" />
