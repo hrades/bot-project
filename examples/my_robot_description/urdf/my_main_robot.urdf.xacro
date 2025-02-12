@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<robot name="my_robot" xmlns:xacro="hettps://www.ros.org/wiki/xacro">
+
+    <!-- Importar Cores (propriedades comuns) -->
+    <xacro:include filename="$(find my_robot_description)/urdf/cm_properties.xacro" />
+
+    <!-- Importar links e juntas -->
+    <xacro:include filename="$(find my_robot_description)/urdf/robot_base.xacro" />
+
+    <!-- Importar o gazebo-->
+    <xacro:include filename="$(find my_robot_description)/urdf/robot_base_gazebo.xacro" />
+
+</robot>
