@@ -54,7 +54,7 @@
         <visual>
             <origin rpy="1.57 0 0" xyz="0 0 0" />
             <geometry>
-                <mesh filename="package://bot_description/meshes/wheel_right_link.STL" />
+                <mesh filename="package://bot_description/meshes/wheel.STL" />
             </geometry>
         </visual>
         <collision>
@@ -84,7 +84,7 @@
         <visual>
             <origin rpy="-1.57 0 0" xyz="0 0 0" />
             <geometry>
-                <mesh filename="package://bot_description/meshes/wheel_left_link.STL" />
+                <mesh filename="package://bot_description/meshes/wheel.STL" />
             </geometry>
         </visual>
         <collision>
