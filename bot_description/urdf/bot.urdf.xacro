@@ -24,13 +24,13 @@
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <mesh filename="package://bot_description/meshes/base_link.STL"/>
+                <mesh filename="package://bot_description/meshes/carenagem.STL"/>
             </geometry>
         </visual>
         <collision>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <mesh filename="package://bot_description/meshes/base_link.STL"/>
+                <mesh filename="package://bot_description/meshes/carenagem.STL"/>
             </geometry>
         </collision>
     </link>
