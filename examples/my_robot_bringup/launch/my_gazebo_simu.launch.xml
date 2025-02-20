@@ -9,10 +9,11 @@
         <arg name="world" value="$(find-pkg-share my_robot_bringup)/worlds/my_gazebo.sdf"/>
     </include>
 
-    <node pkg="gazebo_ros" exec="spawn_entity.py"
-            args="-topic robot_description -entity my_main_robot"/>
+    <node pkg="gazebo_ros" exec="spawn_entity.py" args="-topic robot_description -entity my_main_robot"/>
 
-    <let name="rviz_path" value="$(find-pkg-share my_robot_bringup)/rviz/robot_config_urdf.rviz"/>
+    <node pkg="gazebo_ros" exec="spawn_entity.py" args="-topic robot_description -entity my_main_robot"/>
+
+    <let name="rviz_path" value="$(find-pkg-share my_robot_bringup)/rviz/final_config_urdf.rviz"/>
 
     <node pkg="rviz2" exec="rviz2" output="screen" args="-d $(var rviz_path)" />
 
