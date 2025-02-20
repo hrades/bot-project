@@ -3,7 +3,7 @@
 
     <link name="camera_link">
         <visual>
-            <origin xyz="0.0 0.0 0.0" rpy="0 ${-pi/2} ${-pi/2}"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
             <geometry>
                 <box size="0.01 0.1 0.05"/>
             </geometry>
@@ -16,16 +16,26 @@
         </collision>
         <xacro:box_inertia m="0.1" l="0.01" w="0.1" h="0.05" o_xyz="0 0 0" o_rpy="0 0 0" />
     </link>
+    
+    <link name="camera_link_fix_frame">
+        
+    </link>
 
     <joint name="base_camera_joint" type="fixed">
         <parent link="base_link"/>
         <child link="camera_link"/>
+        <origin xyz="0.3 0.0 0.1" rpy="0 0 0"/>          
+    </joint>
+
+    <joint name="base_camera_fix_frame_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="camera_link_fix_frame"/>
         <origin xyz="0.3 0.0 0.1" rpy="${-pi/2} 0 ${-pi/2}"/>          
     </joint>
 
     <gazebo reference="camera_link">
         
-        <sensor name="camera_sensor" type="camera" update_rate="">
+        <sensor name="camera_sensor" type="camera">
             <pose>0 0 0 0 0 0</pose>
             <visualize>true</visualize>
             <update_rate>10.0</update_rate>
