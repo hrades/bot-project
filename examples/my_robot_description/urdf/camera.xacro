@@ -14,7 +14,7 @@
                 <box size="0.01 0.1 0.05"/>
             </geometry>
         </collision>
-        <xacro:box_inertia m="0.1" l="0.01" w="0.1" h="0.05" xyz="0 0 0" rpy="0 0 0" />
+        <xacro:box_inertia m="0.1" l="0.01" w="0.1" h="0.05" o_xyz="0 0 0" o_rpy="0 0 0" />
     </link>
 
     <joint name="base_camera_joint" type="fixed">
