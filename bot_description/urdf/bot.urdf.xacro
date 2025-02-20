@@ -11,7 +11,9 @@
     <xacro:include filename="$(find bot_description)/urdf/bot_ros2_control.xacro" />
 
     <!-- Include robot assembly file-->
-
     <xacro:include filename="$(find bot_description)/urdf/bot_assembly.xacro" />
+
+    <!-- Include sensors -->
+    <xacro:include filename="$(find bot_description)/urdf/imu_sensor.xacro" />
 
 </robot>
