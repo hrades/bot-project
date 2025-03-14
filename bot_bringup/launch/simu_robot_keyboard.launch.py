@@ -27,7 +27,11 @@ def generate_launch_description():
 
     keyboard = Node(
         package="teleop_twist_keyboard",
-        executable="teleop_twist_keyboard"
+        executable="teleop_twist_keyboard",
+        launch_arguments={
+            "remap" : "cmd_vel:=bot_controller/cmd_vel",
+            "use_sim_time" : "True"
+        }.items()
     )
     
 
