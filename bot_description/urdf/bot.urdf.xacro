@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="autonavbot">
+
+    <xacro:arg name="is_ignition" default="true" />
+    
+    <!-- Include Commom Properties-->
+     <xacro:include filename="$(find bot_description)/urdf/cm_properties.xacro" />
+
+    <!-- Include Gazebo Params -->
+    <xacro:include filename="$(find bot_description)/urdf/bot_gazebo.xacro" />
+
+    <!-- ROS 2 Control -->
+    <xacro:include filename="$(find bot_description)/urdf/bot_ros2_control.xacro" />
+
+    <!-- Include robot assembly file-->
+    <xacro:include filename="$(find bot_description)/urdf/bot_assembly.xacro" />
+
+    <!-- Include sensors -->
+    <xacro:include filename="$(find bot_description)/urdf/imu_sensor.xacro" />
+    <xacro:include filename="$(find bot_description)/urdf/lidar.xacro" />
+
+    
+</robot>
