@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<robot name="my_main_robot" xmlns:xacro="hettps://www.ros.org/wiki/xacro">
+
+    <xacro:arg name="use_ros2_control" default="true"/>
+
+    <!-- Importar Cores (propriedades comuns) -->
+    <xacro:include filename="$(find my_robot_description)/urdf/cm_properties.xacro" />
+
+    <!-- Importar links e juntas -->
+    <xacro:include filename="$(find my_robot_description)/urdf/robot_base.xacro" />
+    <xacro:include filename="$(find my_robot_description)/urdf/lidar.xacro"/>
+    <!--xacro:include filename="$(find my_robot_description)/urdf/camera.xacro"/-->
+
+    <!-- Importar o gazebo -->
+    <xacro:if value="$(arg use_ros2_control)">
+        <xacro:include filename="$(find my_robot_description)/urdf/robot_ros2_control.xacro" />
+    </xacro:if>
+
+    <xacro:unless value="$(arg use_ros2_control)">
+        <xacro:include filename="$(find my_robot_description)/urdf/robot_gazebo.xacro" />
+    </xacro:unless>
+    
+
+</robot>
