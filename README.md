@@ -29,6 +29,6 @@ Desenvolvimento de um projeto de robô móvel autônomo com ROS2
 
 Este projeto tem como objetivo a criação de um robô móvel autônomo utilizando ROS2 (Humble), Linux (Ubuntu 22.04) e RaspberryPi, visando a simulação e construção de protótipos reais. Ele está relacionado com o projeto de conclusão de curso de Engenhara de Controle e Automação.
 
-##### <Info>
+##### Info
 
 Para acessar a versão utilizando o Gazebo Clássico, mude para a branch "gz-classic"
