@@ -17,12 +17,10 @@ slam_toolbox:
     use_map_saver: true
     mode: mapping #localization
 
-    # if you'd like to immediately start continuing a map at a given pose
-    # or at the dock, but they are mutually exclusive, if pose is given
-    # will use pose
-    #map_file_name: test_steve
+    # load standard map file (change if needed)
+    # map_file_name: /home/robot_ws/src/my_robot_description/maps/std_map_serial
     # map_start_pose: [0.0, 0.0, 0.0]
-    #map_start_at_dock: true
+    # map_start_at_dock: true
 
     debug_logging: false
     throttle_scans: 1
