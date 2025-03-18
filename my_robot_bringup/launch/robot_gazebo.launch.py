@@ -15,19 +15,20 @@ from launch.actions import AppendEnvironmentVariable
 
 def generate_launch_description():
     
-    '''joystick = IncludeLaunchDescription(
+    ''' Add this node if you'd like to control the robot with a joystick instead of the keyboard
+    joystick = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory(package_name),'launch','joystick.launch.py'
                 )]), launch_arguments={'use_sim_time': 'true'}.items()
-    )
+    )'''
 
-    twist_mux_params = os.path.join(get_package_share_directory(package_name),'config','twist_mux.yaml')
+    twist_mux_params = os.path.join(get_package_share_directory('my_robot_description'),'config','twist_mux.yaml')
     twist_mux = Node(
             package="twist_mux",
             executable="twist_mux",
             parameters=[twist_mux_params, {'use_sim_time': True}],
             remappings=[('/cmd_vel_out','/diff_cont/cmd_vel_unstamped')]
-        )'''
+        )
 
     gazebo_params_file = join(get_package_share_directory('my_robot_description'), 'config', 'gazebo_params.yaml')
     
@@ -59,7 +60,7 @@ def generate_launch_description():
         name='GAZEBO_MODEL_PATH',
         value=join(get_package_share_directory('my_robot_description'), "models")),
         #joystick,
-        #twist_mux,
+        twist_mux,
         #gazebo,
         #spawn_entity,
         diff_drive_spawner,
