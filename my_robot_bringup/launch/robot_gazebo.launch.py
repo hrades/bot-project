@@ -15,12 +15,8 @@ from launch.actions import AppendEnvironmentVariable
 
 def generate_launch_description():
     
-    ''' Add this node if you'd like to control the robot with a joystick instead of the keyboard
-    joystick = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory(package_name),'launch','joystick.launch.py'
-                )]), launch_arguments={'use_sim_time': 'true'}.items()
-    )'''
+    ''' If you'd like to control the robot with the keyboard, run teleop_twist_keyboard node from package with the same name
+        If you'd like to control the robot with a joystick instead of the keyboard, launch teleop_joy.launch.py'''
 
     twist_mux_params = os.path.join(get_package_share_directory('my_robot_description'),'config','twist_mux.yaml')
     twist_mux = Node(
