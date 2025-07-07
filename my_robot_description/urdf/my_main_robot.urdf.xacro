@@ -2,6 +2,8 @@
 
 <robot name="my_main_robot" xmlns:xacro="hettps://www.ros.org/wiki/xacro">
 
+    <xacro:arg name="use_sim" default="true"/>
+
     <xacro:arg name="use_ros2_control" default="true"/>
 
     <!-- Importar Cores (propriedades comuns) -->
