@@ -1,9 +1,9 @@
 import os
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import TimerAction
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
-from launch.substitutions import Command, LaunchConfiguration
+from launch.substitutions import Command
 from ament_index_python.packages import get_package_share_directory
 
 
@@ -19,7 +19,8 @@ def generate_launch_description():
                     "my_main_robot.urdf.xacro",
                 ),
                 " use_sim:=False"
-            ]),
+            ]
+        ),
         value_type=str,
     )
 
@@ -43,9 +44,11 @@ def generate_launch_description():
         ],
     )
 
+    delayed_controller_manager = TimerAction(period=3.0, actions=[controller_manager])
+
     return LaunchDescription(
         [
             robot_state_publisher_node,
-            controller_manager,
+            delayed_controller_manager
         ]
     )
