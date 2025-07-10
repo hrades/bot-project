@@ -11,20 +11,15 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    robot_description = ParameterValue(
-        Command(
-            [
-                "xacro ",
-                os.path.join(
-                    get_package_share_directory("my_robot_description"),
-                    "urdf",
-                    "my_main_robot.urdf.xacro",
-                ),
-                " use_sim:=False"
-            ]
-        ),
-        value_type=str,
-    )
+    twist_mux_params = os.path.join(get_package_share_directory('my_robot_description'),'config','twist_mux.yaml')
+    twist_mux = Node(
+            package="twist_mux",
+            executable="twist_mux",
+            parameters=[twist_mux_params, {'use_sim_time': False}],
+            remappings=[('/cmd_vel_out','/diff_cont/cmd_vel_unstamped')]
+        )
+    
+    robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
     
     controller_manager = Node(
         package="controller_manager",
@@ -39,6 +34,8 @@ def generate_launch_description():
             ),
         ],
     )
+
+    delayed_controller_manager = TimerAction(period=3.0, actions=[controller_manager])
 
     diff_drive_spawner = Node(
         package="controller_manager",
@@ -67,14 +64,8 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        DeclareLaunchArgument(
-            'use_sim_time',
-            default_value='false',
-            description='Use sim time if true'),
-        DeclareLaunchArgument(
-            'use_ros2_control',
-            default_value='true',
-            description='Use ros2_control if true'),
+        twist_mux,
+        delayed_controller_manager,
         delayed_diff_drive_spawner,
         delayed_joint_broad_spawner
     ])
