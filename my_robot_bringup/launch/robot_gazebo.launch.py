@@ -18,7 +18,7 @@ def generate_launch_description():
     ''' If you'd like to control the robot with the keyboard, run teleop_twist_keyboard node from package with the same name
         If you'd like to control the robot with a joystick instead of the keyboard, launch teleop_joy.launch.py'''
 
-    twist_mux_params = os.path.join(get_package_share_directory('my_robot_description'),'config','twist_mux.yaml')
+    twist_mux_params = join(get_package_share_directory('my_robot_description'),'config','twist_mux.yaml')
     twist_mux = Node(
             package="twist_mux",
             executable="twist_mux",
