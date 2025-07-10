@@ -17,14 +17,15 @@ find_package(PkgConfig)
 
 pkg_check_modules(SERIAL libserial)
 
-add_library(${PROJECT_NAME} SHARED
+add_library(${PROJECT_NAME} SHARED 
   src/robot_interface.cpp
 )
-target_include_directories(${PROJECT_NAME} PRIVATE
+target_include_directories(${PROJECT_NAME} PRIVATE 
   include
   "${SERIAL_INCLUDE_DIRS}"
 )
-target_link_libraries(${PROJECT_NAME} "${SERIAL_LDFLAGS}")
+target_link_libraries(${PROJECT_NAME}
+ "${SERIAL_LDFLAGS}")
 ament_target_dependencies(${PROJECT_NAME}
   hardware_interface
   pluginlib
@@ -33,6 +34,11 @@ ament_target_dependencies(${PROJECT_NAME}
 )
 
 pluginlib_export_plugin_description_file(hardware_interface robot_interface.xml)
+
+install(
+  FILES robot_interface.xml
+  DESTINATION share/${PROJECT_NAME}/plugins
+)
 
 ament_python_install_package(${PROJECT_NAME})
 
@@ -46,6 +52,8 @@ install(PROGRAMS
 install(
   TARGETS ${PROJECT_NAME}
   DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
 )
 
 install(
@@ -62,7 +70,7 @@ ament_export_libraries(
 )
 
 ament_export_dependencies(
-  haedware_interface
+  hardware_interface
   pluginlib
   rclcpp
   rclcpp_lifecycle
