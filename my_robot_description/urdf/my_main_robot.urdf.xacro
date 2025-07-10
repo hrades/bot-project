@@ -4,8 +4,6 @@
 
     <xacro:arg name="use_ros2_control" default="true"/>
 
-    <xacro:arg name="use_sim_time" default="true"/>
-
     <!-- Importar Cores (propriedades comuns) -->
     <xacro:include filename="$(find my_robot_description)/urdf/cm_properties.xacro" />
 
