@@ -1,22 +1,12 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    
      <ros2_control name="RobotSystem" type="system">
-         <!-- Set simulation in Gazebo -->
-        <xacro:if value="$(arg use_sim)">
-            <hardware>
-                <plugin>gazebo_ros2_control/GazeboSystem</plugin>
-            </hardware>
-        </xacro:if>
-        <!-- Set real robot -->
-        <xacro:unless value="$(arg use_sim)">
-            <hardware>
-                <plugin>my_robot_firmware/RobotFirmware</plugin>
-                <param name="port">/dev/ttyUSB0</param>
-            </hardware>
-        </xacro:unless>
-        <!-- Common interfaces -->
+        
+         <hardware>
+             <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+         </hardware>
+                 
          <joint name="left_wheel_joint">
              <command_interface name="velocity">
                  <param name="min">-10</param>
