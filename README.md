@@ -17,10 +17,11 @@ Desenvolvimento de um projeto de robô móvel autônomo com ROS2
 - **my_robot_bringup**: Arquivos para inicializar o robô por completo (com todas as configurações de controle)
 - **my_robot_description**: Arquivos de construção e visualização do robô (rviz e gazebo)
 - **my_robot_firmware**: Arquivos de teste para Arduino + Interface e controlador PID
+- **user_interface**: Programas de auxílio visual para testes
 
 ## Tecnologias Utilizadas
 - **Linguagem pyhton 🐍**
-- **Linguagem C++ 👨🏻‍💻**
+- **Linguagem C++ e arduino 👨🏻‍💻**
 - **ROS2 🤖**
 - **Arquivos URDF e XACRO ⚙️**
 - **Gazebo Classic 📦**
