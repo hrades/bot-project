@@ -1,16 +1,16 @@
 #include <PID_v1.h>
 // L298N H-Bridge pins
-#define L298N_enA 9  
-#define L298N_in2 13 
-#define L298N_in1 12 
-#define L298N_in3 7
-#define L298N_in4 8
-#define L298N_enB 11
+#define L298N_enA 11  
+#define L298N_in2 7
+#define L298N_in1 8 
+#define L298N_in3 13
+#define L298N_in4 12
+#define L298N_enB 9
 // Encoders pins
-#define right_encoder_phaseA 3
-#define right_encoder_phaseB 5
-#define left_encoder_phaseA 2
-#define left_encoder_phaseB 4
+#define right_encoder_phaseA 2
+#define right_encoder_phaseB 4
+#define left_encoder_phaseA 3
+#define left_encoder_phaseB 5
 // Encoders variables
 unsigned int right_encoder_counter = 0;
 unsigned int left_encoder_counter = 0;
@@ -37,12 +37,12 @@ double left_wheel_meas_vel = 0.0;
 double right_wheel_cmd = 0.0;
 double left_wheel_cmd = 0.0;
 // Components
-double Kp_r = 3.0; //11.5;
-double Ki_r = 1.0; //7.5;
-double Kd_r = 0.05; //0.1;
-double Kp_l = 3.2; //12.8;
-double Ki_l = 1.2; //8.3;
-double Kd_l = 0.05; //0.1;
+double Kp_r = 8.5; //11.5;
+double Ki_r = 5.0; //7.5;
+double Kd_r = 0.08; //0.1;
+double Kp_l = 8.5; //12.8;
+double Ki_l = 4.0; //8.3;
+double Kd_l = 0.08; //0.1;
 // Controllers
 PID rightMotor(&right_wheel_meas_vel, &right_wheel_cmd, &right_wheel_cmd_vel, Kp_r, Ki_r, Kd_r, DIRECT);
 PID leftMotor(&left_wheel_meas_vel, &left_wheel_cmd, &left_wheel_cmd_vel, Kp_l, Ki_l, Kd_l, DIRECT);
@@ -63,7 +63,7 @@ void setup() {
   // Set PID
   rightMotor.SetMode(AUTOMATIC);
   leftMotor.SetMode(AUTOMATIC);
-  Serial.begin(115200);
+  Serial.begin(57600);
   // Set encoders
   pinMode(right_encoder_phaseB, INPUT);
   pinMode(left_encoder_phaseB, INPUT);
@@ -157,8 +157,8 @@ void loop() {
     right_encoder_counter = 0;
     left_encoder_counter = 0;
 
-    analogWrite(L298N_enA, right_wheel_cmd);
-    analogWrite(L298N_enB, left_wheel_cmd);
+    analogWrite(L298N_enB, right_wheel_cmd);
+    analogWrite(L298N_enA, left_wheel_cmd);
   }
 }
 
