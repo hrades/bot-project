@@ -70,7 +70,7 @@ Depois de baixar, navegue até "robot_ws" e execute o comando de construção:
 cd /robot_ws/
 colcon build
 ```
-Se o comando não for encontrado, [instalte colcon](https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Colcon-Tutorial.html) antes e rode o comando novamente.
+Se o comando não for encontrado, [instale colcon](https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Colcon-Tutorial.html) antes e rode o comando novamente.
 Caso haja problemas, utilize para cada pacote:
 ```bash
 colcon build --packages-select <nome_do_pacote>
