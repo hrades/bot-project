@@ -4,8 +4,6 @@
 
 Desenvolvimento de um projeto de robô móvel autônomo com ROS2
 
-
-
 ## 📋 Índice
 - [📁 Pastas](#pastas)
 - [🛠️ Tecnologias Utilizadas](#tecnologias-utilizadas)
@@ -14,7 +12,7 @@ Desenvolvimento de um projeto de robô móvel autônomo com ROS2
 ---
 
 ## Pastas
-- **my_robot_bringup**: Arquivos para inicializar o robô por completo (com todas as configurações de controle)
+- [my_robot_bringup](#my_robot_bringup): Arquivos para inicializar o robô por completo (com todas as configurações de controle)
 - **my_robot_description**: Arquivos de construção e visualização do robô (rviz e gazebo)
 - **my_robot_firmware**: Arquivos de teste para Arduino + Interface e controlador PID
 - [sllidar_ros2](#sllidar_ros2): Driver do LiDAR adaptado deste repositório -> https://github.com/Slamtec/sllidar_ros2
@@ -34,11 +32,27 @@ Desenvolvimento de um projeto de robô móvel autônomo com ROS2
 Este projeto tem como objetivo a criação de um robô móvel autônomo utilizando ROS2 (Humble), Linux (Ubuntu 22.04) e RaspberryPi, visando a simulação e construção de protótipos reais. Ele está relacionado com o projeto de conclusão de curso de Engenhara de Controle e Automação.
 Esta branch "gz-classic" utiliza o Gazebo Clássico para a simulação do robô.
 
-- Siga as seguintes instruções para [instalar ROS2](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html#install-ros-2-packages).
+- Siga as seguintes instruções para [instalar o ROS2](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html#install-ros-2-packages).
 
 Para este projeto, devem ser instalados os seguintes pacotes do ros2:
 ```bash
+sudo apt install ros-humble-gazebo* 
+sudo apt install ros-humble-ros2-control 
+sudo apt install ros-humble-ros2-controllers 
+sudo apt install ros-humble-xacro 
+sudo apt install ros-humble-joint-state-publisher-gui 
+sudo apt install ros-humble-turtlesim (opcional) 
+sudo apt install ros-humble-robot-localization
 sudo apt install ros-humble-twist-mux
+sudo apt install ros-humble-joy 
+sudo apt install ros-humble-joy-teleop
+sudo apt install ros-humble-teleop-twist-joy
+sudo apt install ros-humble-teleop-twist-keyboard
+sudo apt install ros-humble-tf-transformations 
+sudo apt install ros-humble-tf2-tools 
+sudo apt install ros-humble-urdf-tutorial 
+sudo apt install ros-humble-navigation2  
+sudo apt install ros-humble-nav2-bringup 
 ```
 E do python:
 ```bash
