@@ -32,7 +32,13 @@ def generate_launch_description():
         parameters=[{"robot_description": robot_description, "use_sim_time": use_sim_time}],
     )
 
-    
+    rplidar_c1_params = os.path.join(get_package_share_directory('my_robot_description'),'config','rplidar_c1.yaml')
+    rplidar_c1 = Node(
+            package='sllidar_ros2',
+            executable='sllidar_node',
+            name='sllidar_node',
+            parameters=[rplidar_c1_params],
+            output='screen')
 
     return LaunchDescription(
         [
@@ -41,5 +47,6 @@ def generate_launch_description():
                 default_value='false',
             ),
             robot_state_publisher_node,
+            rplidar_c1,
         ]
     )
