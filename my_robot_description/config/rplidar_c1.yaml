@@ -6,4 +6,4 @@ sllidar_node:
     frame_id: scan_link
     inverted: false
     angle_compensate: true
-    scan_mode: Sensitivity
+    scan_mode: Standard
