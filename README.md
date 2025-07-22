@@ -104,6 +104,7 @@ Sempre que abrir um novo terminal, rode no workspace do projeto:
 ```bash
 source install/setup.bash
 ```
+---
 
 ## my_robot_bringup
 Segue o passo a passo de como simular o robô, utilizando o computador apenas. Cada etapa deve ser feita em um novo terminal.
