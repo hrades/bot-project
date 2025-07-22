@@ -8,6 +8,7 @@ Desenvolvimento de um projeto de robô móvel autônomo com ROS2
 - [📁 Pastas](#pastas)
 - [🛠️ Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [💡 Sobre o Projeto](#sobre-o-projeto)
+- [⚙️ Configurações do sistema](#configurações-do-sistema)
 
 ---
 
@@ -32,7 +33,31 @@ Desenvolvimento de um projeto de robô móvel autônomo com ROS2
 Este projeto tem como objetivo a criação de um robô móvel autônomo utilizando ROS2 (Humble), Linux (Ubuntu 22.04) e RaspberryPi, visando a simulação e construção de protótipos reais. Ele está relacionado com o projeto de conclusão de curso de Engenhara de Controle e Automação.
 Esta branch "gz-classic" utiliza o Gazebo Clássico para a simulação do robô.
 
-- Siga as seguintes instruções para [instalar o ROS2](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html#install-ros-2-packages).
+---
+
+## Configurações do Sistema
+
+- Caso a raspberry pi tenha pouca memória RAM, recomenda-se configurar uma memória swap no cartão micro SD. Crie um arquivo com o comando a seguir, e coloque o nome da sua área de trabalho onde estiver `<ws>`
+```bash
+sudo fallocate -l 4G /home/<ws>/swapfile
+sudo chmod 600 /home/<ws>/swapfile
+sudo mkswap /home/<ws>/swapfile
+```
+Com esses comandos, a memória swap estará criada e convertida. Ative e verifique com os comandos a seguir:
+```bash
+sudo swapon /home/<ws>/swapfile
+sudo swapon --show
+```
+Edite o arquivo `fstab`, adicionando `/home/<ws>/swapfile swap swap defaults 0 0` à última linha. Para abrir e editar o arquivo, use o comando:
+```bash
+sudo nano /etc/fstab
+```
+Salve apertando 'Ctrl+O' e saia do arquivo com 'Ctrl+X'. Por fim, reinicie o sistema:
+```bash
+sudo reboot
+```
+
+- Siga as seguintes instruções para [instalar o ROS2](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html#install-ros-2-packages) tanto na sua máquina como na raspberry pi.
 
 Para este projeto, devem ser instalados os seguintes pacotes do ros2:
 ```bash
@@ -75,7 +100,7 @@ Caso haja problemas com o comando, utilize para cada pacote:
 ```bash
 colcon build --packages-select <nome_do_pacote>
 ```
-Sempre que abrir um novo terminal, rode:
+Sempre que abrir um novo terminal, rode no workspace do projeto:
 ```bash
 source install/setup.bash
 ```
