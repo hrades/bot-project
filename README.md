@@ -37,7 +37,12 @@ Esta branch "gz-classic" utiliza o Gazebo Clássico para a simulação do robô.
 
 ## Configurações do Sistema
 
-- Caso a raspberry pi tenha pouca memória RAM, recomenda-se configurar uma memória swap no cartão micro SD. Crie um arquivo com o comando a seguir, e coloque o nome da sua área de trabalho onde estiver `<ws>`
+- [Memória SWAP](#memória-swap)
+- [ROS2 e dependências](#baixar-ros2-e-dependências)
+- [Udev Rules](#udev-rules)
+
+### Memória SWAP
+Caso a raspberry pi tenha pouca memória RAM, recomenda-se configurar uma memória swap no cartão micro SD. Crie um arquivo com o comando a seguir, e coloque o nome da sua área de trabalho onde estiver `<ws>`
 ```bash
 sudo fallocate -l 4G /home/<ws>/swapfile
 sudo chmod 600 /home/<ws>/swapfile
@@ -57,8 +62,9 @@ Salve apertando 'Ctrl+O' e saia do arquivo com 'Ctrl+X'. Por fim, reinicie o sis
 sudo reboot
 ```
 
-- Siga as seguintes instruções para [instalar o ROS2](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html#install-ros-2-packages) tanto na sua máquina como na raspberry pi.
+### Baixar ROS2 e dependências
 
+Siga as seguintes instruções para [instalar o ROS2](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html#install-ros-2-packages) tanto na sua máquina como na raspberry pi.
 Para este projeto, devem ser instalados os seguintes pacotes do ros2:
 ```bash
 sudo apt install ros-humble-gazebo* 
@@ -104,6 +110,39 @@ Sempre que abrir um novo terminal, rode no workspace do projeto:
 ```bash
 source install/setup.bash
 ```
+
+### Udev Rules
+- Regras para as portas seriais reconhecerem o arduino e o LiDAR
+
+Acesse a pasta de regras:
+```bash
+cd /etc/udev/rules.d
+```
+Crie uma nova regra:
+```bash
+sudo touch 90-fesabot.rules
+```
+Abra o arquivo em modo edição:
+```bash
+sudo nano 90-fesabot.rules
+```
+Cole o código a seguir. Salve com 'Ctrl+O' e saia com 'Crtl+X'
+```bash
+KERNEL=="ttyUSB*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE:="0777", SYMLINK+="rplidar"
+SUBSYSTEM=="tty", GROUP="plugdev". MODE="0660"
+SUBSYSTEMS=="usb", ATTRS{idProduct}=="7523", ATTRS{idVendor}=="1a86", SYMLINK+="arduino"
+```
+Caso o idVendor e o idProduct sejam diferentes, conecte, um de cada vez, o arduino e o LiDAR e rode o comando `lsusb` para encontrar as informações.
+Após salvar o arquivo, reinicie as regras udev:
+```bash
+sudo udevadm control --reload-rules && sudo service udev restart && sudo udevadm trigger
+```
+Para verificar se ocorreu corretamente, acesse a pasta /dev `(cd /dev)`, utilize o comando `ls` e procure pelos nomes "arduino" e "rplidar".
+Você também pode conectar os dispositivos e checar as portas com:
+```bash
+ls -l /dev | grep ttyUSB
+```
+
 ---
 
 ## my_robot_bringup
