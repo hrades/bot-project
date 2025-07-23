@@ -166,8 +166,3 @@ ros2 launch my_robot_bringup navigation_launch.py
 
 ## sllidar_ros2
 Disponibilização do driver já adaptado para o RPLiDAR C1 da SLAMTEC, que está sendo utilizado neste projeto. Deve ser implementado na raspberry pi.
-
-- Para baixar o repositório original, que contém outros LiDARs:
-```bash
-git clone https://github.com/Slamtec/sllidar_ros2.git
-```
