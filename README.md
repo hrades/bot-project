@@ -65,6 +65,11 @@ sudo reboot
 ### Baixar ROS2 e dependências
 
 Siga as seguintes instruções para [instalar o ROS2](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html#install-ros-2-packages) tanto na sua máquina como na raspberry pi.
+Quando finalizar a instalação, rode o seguinte comando no seu terminal:
+```bash
+echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+```
+
 Para este projeto, devem ser instalados os seguintes pacotes do ros2:
 ```bash
 sudo apt install ros-humble-gazebo* 
@@ -87,7 +92,7 @@ sudo apt install ros-humble-nav2-bringup
 ```
 E do python:
 ```bash
-sudo apt python3-pip
+sudo apt install python3-pip
 pip install pyserial
 pip install transforms3d
 ```
