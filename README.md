@@ -163,8 +163,7 @@ Se o gazebo apresentar erros com o controller_manager, realize os passos a segui
 sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 
 # Atualize o repositório com a nova chave
-echo "deb [signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | \
-sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 
 # Atualize os índices
 sudo apt update
