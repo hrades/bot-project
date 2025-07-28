@@ -157,6 +157,19 @@ Segue o passo a passo de como simular o robô, utilizando o computador apenas. C
 ```bash
 ros2 launch my_robot_bringup my_gazebo_simu.launch.xml
 ```
+Se o gazebo apresentar erros com o controller_manager, realize os passos a seguir:
+```bash
+# Baixe a nova chave GPG
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+
+# Atualize o repositório com a nova chave
+echo "deb [signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | \
+sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+
+# Atualize os índices
+sudo apt update
+```
+
 - Para controlar o robô virtual com controle de video-game
 ```bash
 ros2 launch my_robot_bringup joystick.launch.py
