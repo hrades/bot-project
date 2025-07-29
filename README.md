@@ -88,7 +88,8 @@ sudo apt install ros-humble-tf-transformations
 sudo apt install ros-humble-tf2-tools 
 sudo apt install ros-humble-urdf-tutorial 
 sudo apt install ros-humble-navigation2  
-sudo apt install ros-humble-nav2-bringup 
+sudo apt install ros-humble-nav2-bringup
+sudo apt install libserial-dev
 ```
 E do python:
 ```bash
