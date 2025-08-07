@@ -17,8 +17,8 @@
 // Encoders
 unsigned int right_encoder_counter = 0;
 unsigned int left_encoder_counter = 0;
-String right_wheel_sign = "n";  // 'n' = positive, 'n' = negative
-String left_wheel_sign = "n";  // 'n' = positive, 'n' = negative
+String right_wheel_sign = "p";  // 'p' = positive, 'n' = negative
+String left_wheel_sign = "p";  // 'p' = positive, 'n' = negative
 unsigned long last_millis = 0;
 const unsigned long interval = 100;
 
@@ -42,12 +42,12 @@ double left_wheel_meas_vel = 0.0;     // rad/s
 double right_wheel_cmd = 0.0;             // 0-255
 double left_wheel_cmd = 0.0;              // 0-255
 // Tuning
-double Kp_r = 8.95; //11.5;
-double Ki_r = 0.0; //7.5;
-double Kd_r = 0.0; //0.1;
-double Kp_l = 10.5; //12.8;
-double Ki_l = 0.0; //8.3;
-double Kd_l = 0.0; //0.1;
+double Kp_r = 12.8;
+double Ki_r = 8.3;
+double Kd_r = 0.1;
+double Kp_l = 11.5;
+double Ki_l = 7.5;
+double Kd_l = 0.1;
 // Controller
 PID rightMotor(&right_wheel_meas_vel, &right_wheel_cmd, &right_wheel_cmd_vel, Kp_r, Ki_r, Kd_r, DIRECT);
 PID leftMotor(&left_wheel_meas_vel, &left_wheel_cmd, &left_wheel_cmd_vel, Kp_l, Ki_l, Kd_l, DIRECT);
@@ -62,10 +62,10 @@ void setup() {
   pinMode(L298N_in4, OUTPUT);
 
   // Set Motor Rotation Direction
-  digitalWrite(L298N_in1, LOW);
-  digitalWrite(L298N_in2, HIGH);
-  digitalWrite(L298N_in3, LOW);
-  digitalWrite(L298N_in4, HIGH);
+  digitalWrite(L298N_in1, HIGH);
+  digitalWrite(L298N_in2, LOW);
+  digitalWrite(L298N_in3, HIGH);
+  digitalWrite(L298N_in4, LOW);
 
   rightMotor.SetMode(AUTOMATIC);
   leftMotor.SetMode(AUTOMATIC);
@@ -100,25 +100,25 @@ void loop() {
       value_idx = 0;
     }
     // Positive direction
-    else if(chr == 'n')
+    else if(chr == 'p')
     {
       if(is_right_wheel_cmd && !is_right_wheel_forward)
       {
         // change the direction of the rotation
-        digitalWrite(L298N_in1, HIGH - digitalRead(L298N_in1));
-        digitalWrite(L298N_in2, HIGH - digitalRead(L298N_in2));
+        digitalWrite(L298N_in3, HIGH - digitalRead(L298N_in3));
+        digitalWrite(L298N_in4, HIGH - digitalRead(L298N_in4));
         is_right_wheel_forward = true;
       }
       else if(is_left_wheel_cmd && !is_left_wheel_forward)
       {
         // change the direction of the rotation
-        digitalWrite(L298N_in3, HIGH - digitalRead(L298N_in3));
-        digitalWrite(L298N_in4, HIGH - digitalRead(L298N_in4));
+        digitalWrite(L298N_in1, HIGH - digitalRead(L298N_in1));
+        digitalWrite(L298N_in2, HIGH - digitalRead(L298N_in2));
         is_left_wheel_forward = true;
       }
     }
     // Negative direction
-    else if(chr == 'p')
+    else if(chr == 'n')
     {
       if(is_right_wheel_cmd && is_right_wheel_forward)
       {
@@ -187,19 +187,14 @@ void loop() {
       left_wheel_cmd = 0.0;
     }
 
-    String encoder_read = "r" + right_wheel_sign + String(right_wheel_meas_vel) + ",l" + left_wheel_sign + String(left_wheel_meas_vel);
-    String encoder_plotter = "direito:"+String(right_wheel_meas_vel) + ",esquerdo:"+String(left_wheel_meas_vel);
-    String setpoints = ",set_dir:"+String(right_wheel_cmd_vel)+",set_esq:"+String(left_wheel_cmd_vel)+",";
-    //Serial.print(encoder_read); --> Utilizar no código do robô
-    //Para testes com serial plotter abaixo
-    Serial.print(setpoints); 
-    Serial.println(encoder_plotter);
+    String encoder_read = "r" + right_wheel_sign + String(right_wheel_meas_vel) + ",l" + left_wheel_sign + String(left_wheel_meas_vel) + ",";
+    Serial.println(encoder_read);
     last_millis = current_millis;
     right_encoder_counter = 0;
     left_encoder_counter = 0;
 
-    analogWrite(L298N_enA, right_wheel_cmd);
-    analogWrite(L298N_enB, left_wheel_cmd);
+    analogWrite(L298N_enB, right_wheel_cmd);
+    analogWrite(L298N_enA, left_wheel_cmd);
   }
 }
 
@@ -208,11 +203,11 @@ void rightEncoderCallback()
 {
   if(digitalRead(right_encoder_phaseB) == HIGH)
   {
-    right_wheel_sign = "n";
+    right_wheel_sign = "p";
   }
   else
   {
-    right_wheel_sign = "p";
+    right_wheel_sign = "n";
   }
   right_encoder_counter++;
 }
@@ -222,11 +217,11 @@ void leftEncoderCallback()
 {
   if(digitalRead(left_encoder_phaseB) == HIGH)
   {
-    left_wheel_sign = "p";
+    left_wheel_sign = "n";
   }
   else
   {
-    left_wheel_sign = "n";
+    left_wheel_sign = "p";
   }
   left_encoder_counter++;
 }
