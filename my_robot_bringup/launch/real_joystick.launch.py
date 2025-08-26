@@ -31,7 +31,7 @@ def generate_launch_description():
             "twist_mux_launch.py"
         ),
         launch_arguments={
-            "cmd_vel_out": "/cmd_vel",
+            "cmd_vel_out": "/diff_cont/cmd_vel_unstamped",
             "config_locks": os.path.join(description, "config", "twist_mux_locks.yaml"),
             "config_topics": os.path.join(description, "config", "twist_mux_topics.yaml"),
             "config_joy": os.path.join(description, "config", "twist_mux_joy.yaml"),
