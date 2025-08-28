@@ -9,6 +9,7 @@ Desenvolvimento de um projeto de robô móvel autônomo com ROS2
 - [🛠️ Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [💡 Sobre o Projeto](#sobre-o-projeto)
 - [⚙️ Configurações do sistema](#configurações-do-sistema)
+- [🤖 Robot Setup](#robot-setup)
 
 ---
 
@@ -102,6 +103,18 @@ Quando tudo estiver configurado, crie uma pasta chamada "robot_ws/src" e baixe e
 mkdir robot_ws/src
 git clone https://github.com/hrades/bot-project.git
 ```
+Apague os pacotes desse repositório que não fazem parte da lógica do ROS. A disposição deve ficar assim:
+```bash
+src
+  |_ my_robot_bringup
+  |_ my_robot_description
+  |_ my_robot_firmware
+  |_ sllidar_ros2
+```
+Para apagar, utilize o comando:
+```bash
+rm -rf <nome_da_pasta1> <nome_da_pasta2> ...
+```
 Depois de baixar, navegue até "robot_ws" e execute o comando de construção:
 ```bash
 cd /robot_ws/
@@ -148,6 +161,52 @@ Você também pode conectar os dispositivos e checar as portas com:
 ```bash
 ls -l /dev | grep ttyUSB
 ```
+
+---
+
+## Robot Setup
+
+**Configurações de hardware**
+
+### Montagem
+
+Necessário possuir todos os materiais fabricados da pasta 'componentes fisicos'
+
+1. Com porcas e parafusos de 3,5 mm, monte os suportes dos motores na base
+2. Monte os motores nos suportes. Eles devem ficar "embaixo" da base
+3. Monte o acoplamento e a roda de cada motor em seu eixo
+4. Monte o topo da base impressa do LiDAR em seu suporte impresso. Utilize parafusos ou cola quente
+5. Junte o LiDAR ao seu suporte com fitas dupla face forte
+6. Siga a imagem abaixo para alocar os demais [componentes](https://github.com/hrades/bot-project/blob/gz-classic/componentes%20fisicos/BOM-robo.xlsx) e fixá-los com fita dupla face forte
+
+![Robo-montado](https://github.com/hrades/bot-project/blob/gz-classic/pictures/robo-componentes.png "Robo-montado")  
+
+### Arduino Nano
+
+Abra o arquivo 'robot_controllerV2.ino', que está na pasta '/my_robot_firmware/arduino/robot_controller' no [ArduinoIDE](https://www.arduino.cc/en/software)  
+Adapte o código, como os parâmetros PID e os pinos, caso necessário. Recomenda-se manter o padrão de conexões sugeridos.  
+
+#### Conexões elétricas
+Conecte os fios dos motores na Ponte-H L298N seguindo o padrão abaixo:  
+![Ponte-H](https://github.com/hrades/bot-project/blob/gz-classic/pictures/conexoes-ponteH.png "Ponte-H")  
+Realize as seguintes conexões para o Arduino Nano:  
+![Arduino Nano](https://github.com/hrades/bot-project/blob/gz-classic/pictures/conexoes-arduino.png "Arduino Nano")  
+Conecte o Arduino Nano à Raspberry Pi via USB
+
+### Raspberry
+
+Conecte o LiDAR, o Arduino Nano e a câmera na Raspberry Pi.  
+  
+Para alimentar a Raspberry Pi, pode-se utilizar um conversor DC macho 2,1x5,5mm ou um cabo micro-USB adaptado.  
+- Adapte seu cabo micro-USB abrindo-o e deixando os fios vermelho (fase) e preto (neutro) à mostra, cortando os demais.
+
+Conversor DC-DC
+- Utilizado para converter 12V da fonte para 5V a serem utilizados pela Raspberry Pi e pelo Arduino Nano
+- Faça uma solda baseando-se na imagem a seguir:
+![DC-DC](https://github.com/hrades/bot-project/blob/gz-classic/pictures/DC-DC.png "DC-DC")
+- Com um multímetro, meça o terminal de saída após aplicar 12V na estrada e gire o pino até a tensão chegar a 5V
+- Desconecte o multímetro e solde um fio do cabo microe-USB em cada terminal de saída. Conecte-o na Raspberry
+- Solde um jumper em cada terminal de saída e conecte-os ao Arduino Nano
 
 ---
 
