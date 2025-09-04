@@ -11,7 +11,7 @@ Desenvolvimento de um projeto de robô móvel autônomo com ROS2
 - [⚙️ Configurações do sistema](#configurações-do-sistema)
 - [🤖 Robot Setup](#robot-setup)
 - [📦💻Simulação com Gazebo](#simulação-com-gazebo)
-- [Launch FESA-bot V.1](#launch-fesabot-v.1)
+- [Launch FESA-bot V.1](#launch-fesabot-v1)
 
 ---
 
