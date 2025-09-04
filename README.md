@@ -11,6 +11,7 @@ Desenvolvimento de um projeto de robô móvel autônomo com ROS2
 - [⚙️ Configurações do sistema](#configurações-do-sistema)
 - [🤖 Robot Setup](#robot-setup)
 - [📦💻Simulação com Gazebo](#simulação-com-gazebo)
+- [Launch FESA-bot V.1](#launch-fesabot-v.1)
 
 ---
 
@@ -283,7 +284,7 @@ sudo apt update
 
 - Para controlar o robô virtual com controle de video-game
 ```bash
-ros2 launch my_robot_bringup joystick.launch.py
+ros2 launch my_robot_bringup joystick.launch.py use_sim_time:=true
 ```
 Segure o trigger esquerdo enquanto move o joystick esquerdo para enviar comandos.
 - Para controlar o robô com o teclado do computador
@@ -299,6 +300,47 @@ Em um novo terminal:
 ```bash
 ros2 launch my_robot_bringup navigation_launch.py
 ```
+
+## Launch FESA-bot V.1
+
+Depois de ter configurado e feito o download deste projeto tanto na Raspberry Pi quanto no computador, é possível acionar o robô real.  
+Siga os passos abaixo para ligar cada funcionalidade do robô
+
+1. Acesse a Raspberry Pi via ssh
+2. Entre no workspace do projeto e dê o source (lembre-se de usar colcon build sempre que **mudar arquivos** do workspace)
+> [!TIP]
+> Lembre-se de rodar o comando toda vez que abrir um novo terminal e acessar o ws do projeto
+```bash
+source install/setup.bash
+```
+3. Rode o arquivo launch principal da raspberry
+```bash
+ros2 launch my_robot_bringup all_real_robot.launch.py
+```
+4. Abra 4 novos terminais em seu computador
+5. Ligue o controle manual do joystick (mesmo se for utilizar o teclado)
+```bash
+ros2 launch my_robot_bringup joystick.launch.py use_sim_time:=false
+```
+6. Depois que o robô acabar de acionar os nós, ligue o RViz e abra a configuração padrão para o protótipo
+```bash
+RViz2
+```
+> Vá em 'open config' e abra o arquivo do caminho '/my_robot_bringup/rviz/final_config_real_robot.rviz'
+
+7. Acione o slam
+```bash
+ros2 launch my_robot_bringup online_async_launch.py
+```
+8. Acione o Nav2
+```bash
+ros2 launch my_robot_bringup navigation_launch.py use_sim_time:=false
+```
+9. Mude o tópico principal de '/odom' para '/map'
+10. Adicione duas configurações de mapa. Em uma delas, coloque o tópico '/map' como o principal. Na outra, coloque o tópico '/global_costmap' e mude as cores para costmap
+11. Adicione uma configuração de path e configure o tópico '/plan' como principal
+
+O FESA-bot V.1 estará pronto para uso. Navegue pelo ambiente com direção manual para formar um mapa e, com o mapa completo, dê comandos de posição para que ele ande sozinho.
 
 ## sllidar_ros2
 Disponibilização do driver já adaptado para o RPLiDAR C1 da SLAMTEC, que está sendo utilizado neste projeto. Deve ser implementado na raspberry pi.
