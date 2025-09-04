@@ -10,11 +10,12 @@ Desenvolvimento de um projeto de robô móvel autônomo com ROS2
 - [💡 Sobre o Projeto](#sobre-o-projeto)
 - [⚙️ Configurações do sistema](#configurações-do-sistema)
 - [🤖 Robot Setup](#robot-setup)
+- [📦💻Simulação com Gazebo](#simulação-com-gazebo)
 
 ---
 
 ## Pastas
-- [my_robot_bringup](#my_robot_bringup): Arquivos para inicializar o robô por completo (com todas as configurações de controle)
+- **my_robot_bringup**: Arquivos para inicializar o robô por completo (com todas as configurações de controle)
 - **my_robot_description**: Arquivos de construção e visualização do robô (rviz e gazebo)
 - **my_robot_firmware**: Arquivos de teste para Arduino + Interface e controlador PID
 - [sllidar_ros2](#sllidar_ros2): Driver do LiDAR adaptado deste repositório -> https://github.com/Slamtec/sllidar_ros2
@@ -162,6 +163,56 @@ Você também pode conectar os dispositivos e checar as portas com:
 ls -l /dev | grep ttyUSB
 ```
 
+### Configurando Redes
+- Adicionar uma nova rede à Raspberry Pi  
+
+Ao iniciar a Raspberry Pi e acessá-la via ssh (comando abaixo), pode-se configurar outras redes além da que foi instalada junto ao Linux como padrão
+```bash
+ssh <nome_usuario_raspberry>@<ip_raspberry>
+```
+Vá até a pasta de configurações de redes:
+```bash
+cd /etc/netplan
+```
+Encontre o arquivo .yaml e acesse. Não esqueça o comando 'sudo', já que não está em seu diretório principal.
+```bash
+# mude o nome de acordo com o arquivo que estiver na raspberry
+sudo nano 50-cloud-init.yaml
+```
+O arquivo deve estar com uma estrutura similar a seguinte:
+```bash
+network:
+  version: 2
+  wifis:
+    renderer: networkd
+    wlan0:
+      access-points:
+        "minha-rede-exemplo":
+          password: "minha-senha"
+      dhcp4: true
+      optional: true
+```
+Adicione o nome e a senha das demais redes na ordem de prioridade, ou seja, começando da principal. Abaixo segue um exemplo.
+```bash
+wlan0:
+      access-points:
+        "minha-rede-principal":
+          password: "rede-principal"
+        "minha-rede-exemplo":
+          password: "minha-senha"
+        "minha-outra-rede":
+          password: "outra-rede"
+```
+Salve o arquivo (Ctrl+O, Enter, Ctrl+X) e aplique as configurações
+```bash
+sudo netplan apply
+```
+Reinicie a Raspberry e depois acesse-a novamente, conectando-se à rede principal configurada pelo computador antes do ssh
+```bash
+# reiniciar o sistema da raspberry
+sudo reboot
+```
+
 ---
 
 ## Robot Setup
@@ -210,7 +261,7 @@ Conversor DC-DC
 
 ---
 
-## my_robot_bringup
+## Simulação com Gazebo
 Segue o passo a passo de como simular o robô, utilizando o computador apenas. Cada etapa deve ser feita em um novo terminal.
 
 - Para rodar a simulação
@@ -233,10 +284,17 @@ sudo apt update
 ```bash
 ros2 launch my_robot_bringup joystick.launch.py
 ```
+Segure o trigger esquerdo enquanto move o joystick esquerdo para enviar comandos.
+- Para controlar o robô com o teclado do computador
+```bash
+ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args --remap /cmd_vel:=/cmd_vel_joy
+```
+
 - Para inicializar navegação autônoma
 ```bash
 ros2 launch my_robot_bringup online_async_launch.py
 ```
+Em um novo terminal:
 ```bash
 ros2 launch my_robot_bringup navigation_launch.py
 ```
