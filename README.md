@@ -42,6 +42,7 @@ Esta branch "gz-classic" utiliza o Gazebo Clássico para a simulação do robô.
 - [Memória SWAP](#memória-swap)
 - [ROS2 e dependências](#baixar-ros2-e-dependências)
 - [Udev Rules](#udev-rules)
+- [Configurando Redes][#configurando-redes]
 
 ### Memória SWAP
 Caso a raspberry pi tenha pouca memória RAM, recomenda-se configurar uma memória swap no cartão micro SD. Crie um arquivo com o comando a seguir, e coloque o nome da sua área de trabalho onde estiver `<ws>`
