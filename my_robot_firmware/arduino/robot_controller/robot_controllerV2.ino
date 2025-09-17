@@ -17,8 +17,8 @@
 // Encoders
 unsigned int right_encoder_counter = 0;
 unsigned int left_encoder_counter = 0;
-String right_wheel_sign = "p";  // 'p' = positive, 'n' = negative
-String left_wheel_sign = "p";  // 'p' = positive, 'n' = negative
+char right_wheel_sign = "p";  // 'p' = positive, 'n' = negative
+char left_wheel_sign = "p";  // 'p' = positive, 'n' = negative
 unsigned long last_millis = 0;
 const unsigned long interval = 100;
 
