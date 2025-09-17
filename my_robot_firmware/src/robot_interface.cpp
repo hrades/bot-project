@@ -79,7 +79,7 @@ CallbackReturn RobotInterface::on_activate(const rclcpp_lifecycle::State &)
     try
     {
       arduino_.Open(port_);
-      arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
+      arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_57600);
     }
     catch (...)
     {
