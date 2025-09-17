@@ -121,17 +121,23 @@ hardware_interface::return_type RobotInterface::read(const rclcpp::Time &, const
         std::string res;
         int multiplier = 1;
         while(std::getline(ss, res, ',')){
+           try{
             multiplier = res.at(1) == 'p' ? 1 : -1;
 
-            if(res.at(0) == 'r'){
-                velocity_states_.at(0) = multiplier * std::stod(res.substr(2, res.size()));
+            if (res.at(0) == 'r') {
+                velocity_states_.at(0) = multiplier * std::stod(res.substr(2));
                 position_states_.at(0) += velocity_states_.at(0) * delta_time;
-            }
-            else if(res.at(0) == 'l'){
-                velocity_states_.at(1) = multiplier * std::stod(res.substr(2, res.size()));
+            } else if (res.at(0) == 'l') {
+                velocity_states_.at(1) = multiplier * std::stod(res.substr(2));
                 position_states_.at(1) += velocity_states_.at(1) * delta_time;
             }
         }
+            catch (const std::invalid_argument &e){
+                RCLCPP_ERROR(rclcpp::get_logger("RobotInterface"), "Argumento inválido ao converter a string da serial: '%s'", res.c_str());
+            }
+            catch (const std::out_of_range &e){
+                RCLCPP_ERROR(rclcpp::get_logger("RobotInterface"), "Valor fora do alcance ao converter a string da serial: '%s'", res.c_str());
+            }
         last_run_ = rclcpp::Clock().now();
     }
     return hardware_interface::return_type::OK;
