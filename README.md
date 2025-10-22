@@ -16,6 +16,7 @@ Desenvolvimento de um projeto de robô móvel autônomo com ROS2
 ---
 
 ## Pastas
+- **[Guias](https://github.com/hrades/bot-project/tree/gz-classic/Guias)** : Documentos para auxílio de utilização do projeto
 - **my_robot_bringup**: Arquivos para inicializar o robô por completo (com todas as configurações de controle)
 - **my_robot_description**: Arquivos de construção e visualização do robô (rviz e gazebo)
 - **my_robot_firmware**: Arquivos de teste para Arduino + Interface e controlador PID
