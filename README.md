@@ -1,6 +1,6 @@
 # 🏎️💨 FESA-bot V.1
 
-![Badge de Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-orange)
+![Badge de Status](https://img.shields.io/badge/Status%20do%20Projeto-Concluído-lightgreen)
 
 Desenvolvimento de um projeto de robô móvel autônomo com ROS2
 
@@ -215,6 +215,9 @@ Reinicie a Raspberry e depois acesse-a novamente, conectando-se à rede principa
 sudo reboot
 ```
 
+### sllidar_ros2
+Disponibilização do driver já adaptado para o RPLiDAR C1 da SLAMTEC, que está sendo utilizado neste projeto. Deve ser implementado na raspberry pi.
+
 ---
 
 ## Robot Setup
@@ -341,6 +344,3 @@ ros2 launch my_robot_bringup navigation_launch.py use_sim_time:=false
 11. Adicione uma configuração de path e configure o tópico '/plan' como principal
 
 O FESA-bot V.1 estará pronto para uso. Navegue pelo ambiente com direção manual para formar um mapa e, com o mapa completo, dê comandos de posição para que ele ande sozinho.
-
-## sllidar_ros2
-Disponibilização do driver já adaptado para o RPLiDAR C1 da SLAMTEC, que está sendo utilizado neste projeto. Deve ser implementado na raspberry pi.
